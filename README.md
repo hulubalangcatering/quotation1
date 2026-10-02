@@ -29,7 +29,7 @@ Rujukan konfigurasi: [Dokumentasi rasmi Vercel](https://vercel.com/docs/project-
 
 ## Cuba di komputer
 
-Pasang Node.js 20 atau lebih baharu jika belum tersedia. Buka terminal dalam folder ini:
+Gunakan Node.js 24.x. Versi utama dipinkan supaya Vercel tidak bertukar kepada versi utama baharu secara automatik. Buka terminal dalam folder ini:
 
 ```text
 npm run dev
