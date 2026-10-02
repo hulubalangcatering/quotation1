@@ -1,0 +1,13 @@
+{
+  "name": "hulubalang-quotation",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Sistem sebut harga Hulubalang Katering",
+  "scripts": {
+    "dev": "node tools/server.mjs",
+    "build": "node tools/build.mjs",
+    "test": "node --test tests/pricing.test.mjs"
+  },
+  "engines": { "node": ">=20" }
+}

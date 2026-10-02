@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#161714">
+  <meta name="description" content="Pilih pakej majlis Hulubalang Katering, kira sebut harga dan deposit 10%, serta muat turun quotation PDF.">
+  <title>Sebut Harga Majlis | Hulubalang Katering</title>
+  <link rel="icon" href="assets/logo-hulubalang.png" type="image/png">
+  <link rel="stylesheet" href="assets/style.css">
+  <script src="assets/vendor/pdf-lib.min.js" defer></script>
+  <script type="module" src="assets/js/app.js"></script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Terus ke pilihan pakej</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="./" class="brand" aria-label="Hulubalang Katering, halaman utama">
+        <img src="assets/logo-hulubalang.png" alt="Logo Hulubalang Katering" width="76" height="76">
+        <span><strong>HULUBALANG</strong><span>KATERING & WEDDING · MELAKA</span></span>
+      </a>
+      <a class="header-contact" href="https://www.wasap.my/60176048302/nakbookingmajlis" target="_blank" rel="noopener noreferrer"><span data-icon="chat"></span><span>Bantuan admin</span></a>
+    </div>
+  </header>
+  <main id="main" class="container">
+    <div class="intro">
+      <span class="eyebrow">SEBUT HARGA DALAM BEBERAPA LANGKAH</span>
+      <h1>Majlis anda. Pilihan anda.</h1>
+      <p>Pilih pakej, lihat harga dan rancang majlis dengan lebih mudah.</p>
+    </div>
+    <div class="layout">
+      <div class="main-column">
+        <form id="quotation-form">
+          <section class="panel" aria-labelledby="package-heading">
+            <div class="section-title"><span class="step">01</span><div><h2 id="package-heading">Pilih pakej majlis</h2><p>Harga dikemas kini mengikut pilihan anda.</p></div></div>
+            <div id="category-grid" class="category-grid" role="group" aria-label="Jenis pakej"></div>
+            <div class="field-grid selection-fields">
+              <div id="group-field" class="field"><label for="group-select" id="group-label">Tempat majlis</label><select id="group-select"></select></div>
+              <div class="field" id="pax-field"><label for="pax-select">Bilangan tetamu</label><select id="pax-select"></select></div>
+              <div class="field" id="custom-pax-field" hidden><label for="custom-pax">Bilangan tetamu <span>(minimum 50)</span></label><input id="custom-pax" type="number" min="50" max="100000" step="1" value="50" inputmode="numeric"><small id="rate-note"></small></div>
+            </div>
+            <details class="package-details"><summary><span data-icon="list"></span>Apa yang termasuk dalam pakej?</summary><div id="package-details-content"></div></details>
+          </section>
+          <section class="panel" aria-labelledby="addons-heading">
+            <div class="section-title"><span class="step">02</span><div><h2 id="addons-heading">Tambahan untuk majlis</h2><p>Pilihan tambahan ini tidak wajib.</p></div></div>
+            <div id="addons-list" class="addons-list"></div>
+          </section>
+          <section class="panel" aria-labelledby="customer-heading">
+            <div class="section-title"><span class="step">03</span><div><h2 id="customer-heading">Maklumat anda & majlis</h2><p>Lengkapkan untuk mendapatkan quotation PDF.</p></div></div>
+            <div class="field-grid">
+              <div class="field full"><label for="customer-name">Nama penuh <span>*</span></label><input id="customer-name" name="name" autocomplete="name" required maxlength="120" placeholder="Nama seperti dalam tempahan"></div>
+              <div class="field"><label for="customer-email">E-mel <span>*</span></label><input id="customer-email" name="email" type="email" autocomplete="email" required maxlength="160" placeholder="nama@email.com"></div>
+              <div class="field"><label for="customer-phone">Nombor telefon <span>*</span></label><input id="customer-phone" name="phone" type="tel" autocomplete="tel" required maxlength="25" placeholder="Contoh: 012-345 6789"></div>
+              <div class="field full"><label for="customer-address">Alamat pelanggan <span>*</span></label><textarea id="customer-address" name="address" autocomplete="street-address" required maxlength="600" rows="2" placeholder="Alamat penuh anda"></textarea></div>
+              <div class="field"><label for="event-date">Tarikh majlis <span>*</span></label><input id="event-date" name="date" type="date" required></div>
+              <div class="field"><label for="event-time">Masa majlis <span>(pilihan)</span></label><input id="event-time" name="time" type="time"></div>
+              <div class="field full"><label for="event-location">Lokasi / alamat majlis <span>*</span></label><textarea id="event-location" name="location" required maxlength="600" rows="2" placeholder="Nama tempat dan alamat penuh majlis"></textarea><small id="location-hint">Nyatakan lokasi untuk rujukan pihak Hulubalang Katering.</small></div>
+              <div class="field full"><label for="customer-notes">Pilihan menu / catatan <span>(pilihan)</span></label><textarea id="customer-notes" name="notes" maxlength="800" rows="3" placeholder="Contoh: nasi beriyani, daging masak hitam. Nyatakan juga keperluan majlis anda."></textarea><small>Pilihan bertanda “/” dalam menu boleh dinyatakan di sini untuk semakan admin.</small></div>
+            </div>
+            <div class="privacy-inline"><span data-icon="shield"></span><p>Maklumat ini digunakan untuk urusan sebut harga dan tempahan anda. Baca <button type="button" class="text-button privacy-trigger">polisi privasi</button>.</p></div>
+            <button type="submit" class="button dark wide"><span data-icon="file"></span>Lihat quotation saya</button>
+          </section>
+        </form>
+        <section id="quote-panel" class="panel quote-panel" aria-labelledby="quote-heading" hidden>
+          <div class="quote-top"><div><span class="eyebrow">QUOTATION ANDA</span><h2 id="quote-heading" tabindex="-1">Sebut harga majlis</h2></div><span class="quote-tag">Belum dibayar</span></div>
+          <div id="quote-content"></div>
+          <button type="button" id="download-pdf" class="button dark wide"><span data-icon="download"></span>Muat turun quotation PDF</button>
+          <p class="small muted">Dokumen ini ialah sebut harga. Tempahan dan ketersediaan tarikh tertakluk kepada pengesahan pihak Hulubalang Katering.</p>
+        </section>
+      </div>
+      <aside class="summary-column" aria-labelledby="summary-heading">
+        <div class="summary-card">
+          <span class="eyebrow">RINGKASAN PILIHAN</span><h2 id="summary-heading">Majlis pilihan anda</h2>
+          <div class="summary-package"><span class="summary-icon" data-icon="utensils"></span><div><strong id="summary-package">Pakej Kahwin</strong><span id="summary-detail"></span></div></div>
+          <div id="summary-lines" class="summary-lines"></div>
+          <div class="total-row"><span>Jumlah keseluruhan</span><strong id="total-price">RM0.00</strong></div>
+          <div class="deposit-box"><div><span>DEPOSIT TEMPAHAN</span><span class="pill">10%</span></div><strong id="deposit-price">RM0.00</strong><p>Baki selepas deposit: <b id="balance-price">RM0.00</b></p></div>
+          <p class="summary-note">Deposit dikira daripada harga pakej termasuk semua tambahan yang dipilih.</p>
+          <div id="pricing-error" class="error" role="alert" hidden></div>
+          <button type="button" id="pay-button" class="button gold wide"><span data-icon="card"></span>Bayar deposit 10%</button>
+          <a id="whatsapp-button" class="button outline wide" href="https://www.wasap.my/60176048302/nakbookingmajlis" target="_blank" rel="noopener noreferrer"><span data-icon="chat"></span>Hubungi admin di WhatsApp</a>
+          <a class="terms-button" href="assets/terma-dan-syarat.pdf" download="Terma-dan-Syarat-Hulubalang-Katering.pdf"><span data-icon="download"></span>Muat turun terma & syarat (PDF)</a>
+          <p class="small summary-help">Perlu ubah suai pakej? Admin kami sedia membantu.</p>
+        </div>
+        <div class="trust-note"><span data-icon="shield"></span><div><strong>Privasi anda diutamakan</strong><p>Tiada akaun diperlukan. Maklumat quotation diproses dalam pelayar anda.</p></div></div>
+      </aside>
+    </div>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><div><strong>Hulubalang Katering</strong><p>Diuruskan oleh Hazami Jaya Enterprise<br>SSM: 200603190734 (MA0103688-D)</p><p>No. 12A-1, Jalan Inang 1, Taman Paya Rumput Utama, 76450 Melaka.</p></div><div class="footer-privacy"><strong>Privasi & penggunaan data</strong><p>Maklumat anda digunakan untuk urusan dalaman sebut harga dan tempahan. Kami tidak menjual data pelanggan. Perkhidmatan pembayaran dan WhatsApp digunakan apabila anda memilihnya.</p><button type="button" class="text-button privacy-trigger">Baca polisi privasi</button></div></div></footer>
+  <dialog id="payment-dialog" aria-labelledby="payment-title"><div class="dialog-header"><h2 id="payment-title">Bayar deposit tempahan</h2><button type="button" class="icon-button" data-close="payment-dialog" aria-label="Tutup borang pembayaran">×</button></div><div class="payment-reference"><div><span>Deposit 10%</span><strong id="payment-amount"></strong></div><div><span>No. quotation</span><strong id="payment-reference"></strong><button type="button" id="copy-reference" class="text-button small">Salin nombor quotation</button></div></div><p class="payment-instruction">Jumlah deposit diisi secara automatik dalam borang BCL. Semak jumlah sebelum meneruskan dan nyatakan nombor quotation ini semasa berhubung dengan admin.</p><div id="payment-embed-container"></div><p class="payment-fallback">Jika borang tidak muncul, <a href="https://hulubalangkatering.bcl.my/embed/form/pembayarandeposit" target="_blank" rel="noopener noreferrer">buka borang pembayaran di tab baharu</a>.</p><p class="small muted">Pembayaran diproses oleh BCL. Simpan resit dan hubungi admin untuk pengesahan tempahan.</p></dialog>
+  <dialog id="privacy-dialog" aria-labelledby="privacy-title"><div class="dialog-header"><h2 id="privacy-title">Polisi privasi</h2><button type="button" class="icon-button" data-close="privacy-dialog" aria-label="Tutup polisi privasi">×</button></div><div class="policy-content"><p><strong>Pengendali:</strong> Hazami Jaya Enterprise (Hulubalang Katering), SSM 200603190734 (MA0103688-D).</p><h3>Tujuan maklumat dikumpulkan</h3><p>Nama, e-mel, nombor telefon, alamat dan maklumat majlis digunakan bagi menyediakan sebut harga, berhubung dengan anda dan menguruskan tempahan.</p><h3>Penggunaan & perkongsian data</h3><p>Kami tidak menjual atau menggunakan maklumat pelanggan untuk pemasaran pihak ketiga. Maklumat untuk urusan tempahan digunakan oleh pihak Hulubalang Katering. Apabila anda memilih pembayaran BCL atau WhatsApp, maklumat yang anda masukkan atau hantar pada perkhidmatan tersebut diproses oleh penyedia berkenaan mengikut polisi mereka.</p><h3>Cara draf sistem ini berfungsi</h3><p>Kiraan harga dan penjanaan PDF berlaku dalam pelayar anda. Borang quotation ini tidak menghantar maklumat pelanggan ke pangkalan data, tidak menyimpan maklumat tersebut dalam storan pelayar, dan tidak menggunakan analitik pengiklanan. Muat semula halaman akan mengosongkan pilihan dan maklumat.</p><h3>Perlindungan maklumat</h3><p>Gunakan laman melalui sambungan HTTPS dan elakkan berkongsi dokumen quotation yang mengandungi maklumat peribadi secara terbuka. Butiran pembayaran diuruskan melalui borang BCL; laman quotation ini tidak menyimpan butiran kad atau perbankan anda.</p><h3>Hubungi kami</h3><p>Untuk pertanyaan atau pembetulan maklumat, hubungi admin melalui <a href="https://www.wasap.my/60176048302/nakbookingmajlis" target="_blank" rel="noopener noreferrer">WhatsApp 017-604 8302</a>.</p></div></dialog>
+  <div class="mobile-price-bar" aria-label="Harga semasa"><div><span>Jumlah</span><strong id="mobile-total">RM0.00</strong></div><div><span>Deposit 10%</span><strong id="mobile-deposit">RM0.00</strong></div><a href="#summary-heading" aria-label="Lihat ringkasan harga"><span data-icon="list"></span><span>Ringkasan</span></a></div>
+  <div id="toast" role="status" class="toast" hidden></div>
+  <noscript><p class="noscript">Sila aktifkan JavaScript untuk memilih pakej dan mengira sebut harga.</p></noscript>
+</body>
+</html>
