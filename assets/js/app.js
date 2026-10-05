@@ -57,8 +57,10 @@ function renderOptions(resetPax = false) {
     if (resetPax || !group.tiers.some(t => t.pax === Number(state.pax))) state.pax = group.tiers[0].pax;
     $('#pax-select').innerHTML = group.tiers.map(t => `<option value="${t.pax}" ${t.pax === Number(state.pax) ? 'selected' : ''}>${t.pax.toLocaleString('en-MY')} tetamu — ${money(t.price * 100)}</option>`).join('');
   }
-  const menu = category.menus?.[group.id] || category.menu || [];
-  $('#package-details-content').innerHTML = `<p>${escape(category.description)}</p>${menu.length ? `<h3>Menu</h3><ul>${menu.map(m => `<li>${escape(m)}</li>`).join('')}</ul>` : ''}<h3>Pakej termasuk</h3><ul>${category.included.map(m => `<li>${escape(m)}</li>`).join('')}</ul>${category.note ? `<p class="detail-note">${escape(category.note)}</p>` : ''}`;
+  const menu = group.menu || category.menus?.[group.id] || category.menu || [];
+  const sections = group.sections || [{ title: 'Pakej termasuk', items: category.included }];
+  const note = group.note ?? category.note;
+  $('#package-details-content').innerHTML = `<p>${escape(category.description)}</p>${menu.length ? `<h3>Menu</h3><ul>${menu.map(m => `<li>${escape(m)}</li>`).join('')}</ul>` : ''}${sections.map(section => `<h3>${escape(section.title)}</h3><ul>${section.items.map(m => `<li>${escape(m)}</li>`).join('')}</ul>`).join('')}${note ? `<p class="detail-note">${escape(note)}</p>` : ''}`;
   $('#location-hint').textContent = state.category === 'kahwin' ? `Pilihan pakej: ${group.label}. Lengkapkan alamat atau butiran lokasi majlis.` : 'Nyatakan lokasi untuk rujukan pihak Hulubalang Katering.';
 }
 function renderAddons() {

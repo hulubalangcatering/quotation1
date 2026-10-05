@@ -6,6 +6,16 @@ const standardMenu = [
   'Daging masak hitam / kurma', 'Acar jelatah',
   'Buah tembikai / oren', 'Air Sunquick / sirap limau', 'Peralatan hidangan'
 ];
+const homeWedding = {
+  menu: ['Nasi minyak / beriyani / hujan panas', 'Nasi putih 20%', 'Ayam masak merah / goreng berempah', 'Daging masak hitam / kurma', 'Acar jelatah', 'Dalca sayur / masak lemak nenas + ikan masin', 'Ulam + sambal belacan + ikan masin / papadom', 'Buah tembikai / oren', 'Air 2 balang / 5 balang'],
+  sections: [
+    { title: 'Bridal', items: ['Pelamin eksklusif', 'Walkway 6 pcs', 'Pintu gerbang', '1 × makeup', '1 set busana lelaki dan perempuan', 'Payung', 'Kipas', 'Set renjis', 'Aksesori'] },
+    { title: 'Set kelengkapan rumah / dewan', items: ['24 set meja tetamu', '1 set meja makan beradab', '2 set buffet table', '6 stall station', '2 unit aircooler', '6 unit mist fan', '1 bilik persalinan'] },
+    { title: 'Set hidangan raja sehari dan VIP', items: ['1 set ayam mempelai', '1 set udang cucuk', '1 set udang butter', '1 set ketam butter', '1 set siakap 3 rasa', '1 set buah berhias', '2 set dome (pihak sebelah)'] },
+    { title: 'Hiburan & audio', items: ['DJ & PA System'] }
+  ],
+  note: 'Pilihan menu dan jumlah balang air disahkan bersama admin.'
+};
 export const ADDONS = {
   photographer: { label: 'Jurugambar', price: 1600, unit: 'pakej', max: 1, note: 'Rakaman kenangan majlis anda' },
   extraFood: { label: 'Tambahan makanan', price: 15, unit: 'pax', max: 10000 },
@@ -20,8 +30,8 @@ export const ADDONS = {
 export const CATALOG = [
   { id: 'kahwin', label: 'Pakej Kahwin', icon: 'heart', description: 'Pilihan pakej mengikut tempat majlis', groupLabel: 'Tempat majlis',
     groups: [
-      group('rumah', 'Majlis di rumah', [500, 1000], [13900, 18900]),
-      group('dewan-sendiri', 'Dewan sendiri', [500, 1000], [16900, 21900]),
+      { ...group('rumah', 'Majlis di rumah', [500, 1000], [13900, 18900]), ...homeWedding },
+      { ...group('dewan-sendiri', 'Dewan sendiri', [500, 1000], [16900, 21900]), ...homeWedding },
       group('raja-haji', 'Dewan Raja Haji, Bukit Baru', [500, 1000], [15900, 20900]),
       group('grandiose', 'Grandiose Event Hall, Ayer Keroh', [500, 1000], [16900, 21900]),
       group('casa-bonita', 'Casa Bonita Hotel, Limbongan', [500, 1000], [16900, 21900]),
@@ -111,5 +121,5 @@ export function calculate(selection) {
   }
   const total = lines.reduce((sum, line) => sum + line.total, 0);
   const deposit = Math.round(total / 10);
-  return { category, group: selectedGroup, pax, extraPax, totalPax: pax + extraPax, base, lines, total, deposit, balance: total - deposit, menu: category.menus?.[selectedGroup.id] || category.menu || [], included: category.included };
+  return { category, group: selectedGroup, pax, extraPax, totalPax: pax + extraPax, base, lines, total, deposit, balance: total - deposit, menu: selectedGroup.menu || category.menus?.[selectedGroup.id] || category.menu || [], included: selectedGroup.sections ? selectedGroup.sections.flatMap(section => section.items.map(item => section.title + ': ' + item)) : category.included, note: selectedGroup.note ?? category.note };
 }

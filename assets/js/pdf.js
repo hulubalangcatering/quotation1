@@ -125,7 +125,7 @@ export async function createQuotePdf(q) {
     await paragraph(q.category.label+(q.category.groups.length>1?' | '+q.group.label:'')+' | '+q.pax.toLocaleString('en-MY')+' tetamu',{size:10,bold:true,after:12});
     if(q.menu.length){await heading('MENU');for(const item of q.menu)await paragraph('• '+item,{size:10,after:3});}
     await heading('PAKEJ TERMASUK');for(const item of q.included)await paragraph('• '+item,{size:10,after:4});
-    if(q.category.note){await heading('NOTA PAKEJ');await paragraph(q.category.note,{size:9});}
+    if(q.note){await heading('NOTA PAKEJ');await paragraph(q.note,{size:9});}
     if(q.menu.some(item=>item.includes('/')))await paragraph('Pilihan bertanda / adalah seperti dalam poster. Pilihan akhir boleh dinyatakan pada catatan pelanggan dan disahkan bersama admin.',{size:9,color:muted});
   }
   const pages=doc.getPages();
