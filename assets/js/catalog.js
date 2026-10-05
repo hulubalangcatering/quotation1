@@ -16,6 +16,17 @@ const homeWedding = {
   ],
   note: 'Pilihan menu dan jumlah balang air disahkan bersama admin.'
 };
+const hallWedding = (casaBonita = false) => ({
+  menu: ['Nasi putih', 'Nasi minyak / beriyani / hujan panas', 'Ayam masak merah / goreng berempah', 'Daging masak hitam / kurma', 'Acar jelatah', 'Dalca sayur / masak lemak nenas + ikan masin', 'Ulam + sambal belacan + ikan masin / papadom', 'Buah tembikai / oren', 'Air 5 balang'],
+  sections: [
+    { title: 'Kelengkapan dewan', items: ['26 set meja tetamu (bulat) / kerusi tetamu (bersarung)', '1 set meja makan beradab', '1 set meja kek', '2 set meja buffet', '2 set kerusi mempelai pengantin', '2 meja bulat VVIP (bersarung & reben)', '2 set peralatan hidangan VVIP', 'Dekorasi meja buffet', 'Bunga hiasan (meja tetamu)'] },
+    { title: 'Bridal', items: ['Pelamin eksklusif', '1 × makeup', '1 set busana lelaki dan perempuan', 'Payung', 'Kipas', 'Set renjis', 'Aksesori'] },
+    { title: 'DJ & PA System', items: casaBonita ? ['DJ & PA System'] : ['DJ profesional', 'Sistem PA lengkap', 'Mic tanpa wayar', 'Lagu pilihan sepanjang majlis', 'MC (pilihan)'] },
+    { title: 'Set hidangan raja sehari dan VIP', items: ['1 set ayam mempelai', '1 set udang cucuk', '1 set udang butter', '1 set ketam butter', '1 set siakap 3 rasa', '1 set buah berhias', '2 set dome (pihak sebelah)'] },
+    { title: 'Hadiah percuma', items: ['Gubahan hantaran 9 balas 7', '1 fresh flower bouquet', ...(casaBonita ? ['Baju custom made', '1 ekor kambing golek'] : ['Pramusaji']), 'Kad kahwin', 'Kek 2 tingkat', 'Silat pengantin', 'Henna'] }
+  ],
+  note: 'Pilihan menu disahkan bersama admin.'
+});
 export const ADDONS = {
   photographer: { label: 'Jurugambar', price: 1600, unit: 'pakej', max: 1, note: 'Rakaman kenangan majlis anda' },
   extraFood: { label: 'Tambahan makanan', price: 15, unit: 'pax', max: 10000 },
@@ -32,9 +43,9 @@ export const CATALOG = [
     groups: [
       { ...group('rumah', 'Majlis di rumah', [500, 1000], [13900, 18900]), ...homeWedding },
       { ...group('dewan-sendiri', 'Dewan sendiri', [500, 1000], [16900, 21900]), ...homeWedding },
-      group('raja-haji', 'Dewan Raja Haji, Bukit Baru', [500, 1000], [15900, 20900]),
-      group('grandiose', 'Grandiose Event Hall, Ayer Keroh', [500, 1000], [16900, 21900]),
-      group('casa-bonita', 'Casa Bonita Hotel, Limbongan', [500, 1000], [16900, 21900]),
+      { ...group('raja-haji', 'Dewan Raja Haji, Bukit Baru', [500, 1000], [15900, 20900]), ...hallWedding() },
+      { ...group('grandiose', 'Grandiose Event Hall, Ayer Keroh', [500, 1000], [16900, 21900]), ...hallWedding() },
+      { ...group('casa-bonita', 'Casa Bonita Hotel, Limbongan', [500, 1000], [16900, 21900]), ...hallWedding(true) },
       group('rindu', 'The Rindu Homestay, Merlimau', [500, 1000], [16900, 21900])
     ],
     menu: [], included: ['Pakej perkahwinan mengikut lokasi dan jumlah tetamu yang dipilih.'],
