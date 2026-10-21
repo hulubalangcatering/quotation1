@@ -153,7 +153,7 @@ $('#download-pdf').addEventListener('click', async () => {
 });
 $('#pay-button').addEventListener('click', () => {
   const q = buildQuote(); if (!q) return; renderQuote(q);
-  const paymentUrl = new URL('https://hulubalangkatering.bcl.my/embed/form/pembayarandeposit');
+  const paymentUrl = new URL('https://hulubalangkatering.bcl.my/form/pembayarandeposit');
   paymentUrl.searchParams.set('amount', (q.deposit / 100).toFixed(2));
   window.open(paymentUrl.href, '_blank', 'noopener,noreferrer');
 });
