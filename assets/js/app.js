@@ -153,21 +153,9 @@ $('#download-pdf').addEventListener('click', async () => {
 });
 $('#pay-button').addEventListener('click', () => {
   const q = buildQuote(); if (!q) return; renderQuote(q);
-  $('#payment-amount').textContent = money(q.deposit);
-  $('#payment-reference').textContent = q.reference;
-  const amount = (q.deposit / 100).toFixed(2);
-  const frameUrl = 'payment.html?amount=' + encodeURIComponent(amount);
-  let frame = $('#payment-embed-container iframe');
-  if (!frame) {
-    frame = document.createElement('iframe'); frame.title = 'Borang pembayaran deposit BCL'; frame.className = 'payment-frame'; frame.referrerPolicy = 'strict-origin-when-cross-origin';
-    $('#payment-embed-container').append(frame);
-  }
-  // The official BCL loader forwards the amount query to its form.
-  // Reset the form when the deposit changes so a stale amount cannot be reused.
-  if (frame.getAttribute('src') !== frameUrl || frame.dataset.quoteReference !== q.reference) frame.src = frameUrl;
-  frame.dataset.quoteReference = q.reference;
-  $('.payment-fallback a').href = COMPANY.payment + '?amount=' + encodeURIComponent(amount);
-  $('#payment-dialog').showModal();
+  const paymentUrl = new URL('https://hulubalangkatering.bcl.my/embed/form/pembayarandeposit');
+  paymentUrl.searchParams.set('amount', (q.deposit / 100).toFixed(2));
+  window.open(paymentUrl.href, '_blank', 'noopener,noreferrer');
 });
 document.querySelectorAll('[data-close]').forEach(button => button.addEventListener('click', () => document.getElementById(button.dataset.close).close()));
 document.querySelectorAll('.privacy-trigger').forEach(button => button.addEventListener('click', () => $('#privacy-dialog').showModal()));
